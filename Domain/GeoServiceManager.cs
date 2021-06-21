@@ -26,9 +26,30 @@ namespace Domain
             }
         }
 
+        public void AddContinent(Continent continent)
+        {
+            try
+            {
+                if (_unitOfWork.ContinentRepo.Exists(continent.Name))
+                    throw new DomainException("The name of a continent must be unique");
+                _unitOfWork.ContinentRepo.Add(continent);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public void AddCountry(Country country)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _unitOfWork.CountryRepo.Add(country);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public void AddRiver(River river)
@@ -36,6 +57,54 @@ namespace Domain
             try
             {
                 _unitOfWork.RiverRepo.Add(river);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public City GetCity(string name)
+        {
+            try
+            {
+                return _unitOfWork.CityRepo.Get(name);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public Continent GetContinent(string name)
+        {
+            try
+            {
+                return _unitOfWork.ContinentRepo.Get(name);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public Country GetCountry(string name)
+        {
+            try
+            {
+                return _unitOfWork.CountryRepo.Get(name);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public River GetRiver(string name)
+        {
+            try
+            {
+                return _unitOfWork.RiverRepo.Get(name);
             }
             catch (Exception ex)
             {
@@ -55,9 +124,40 @@ namespace Domain
             }
         }
 
+        public void RemoveContinent(Continent continent)
+        {
+            try
+            {
+                if (continent.Countries.Count != 0)
+                    throw new DomainException("A continent can only be removed when it no longes has any countries");
+                _unitOfWork.ContinentRepo.Remove(continent);
+            }
+            catch (DomainException domainEx)
+            {
+                throw domainEx;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public void RemoveCountry(Country country)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (country.Cities.Count != 0)
+                    throw new DomainException("A Country can only be removed when it no longer has any cities.");
+                _unitOfWork.CountryRepo.Remove(country);
+            }
+            catch (DomainException domainEx)
+            {
+                throw domainEx;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public void RemoveRiver(River river)
@@ -84,9 +184,28 @@ namespace Domain
             }
         }
 
+        public void UpdateContinent(Continent continent)
+        {
+            try
+            {
+                _unitOfWork.ContinentRepo.Update(continent);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public void UpdateCountry(Country country)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _unitOfWork.CountryRepo.Update(country);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public void UpdateRiver(River river)
