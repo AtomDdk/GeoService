@@ -11,5 +11,6 @@ namespace Domain.Interfaces
         public IRepository<Country> CountryRepo{ get; }
         public IRepository<City> CityRepo { get; }
         public IRepository<River> RiverRepo { get; }
+        void Complete();
     }
 }

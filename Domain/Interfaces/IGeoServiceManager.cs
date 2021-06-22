@@ -7,6 +7,10 @@ namespace Domain.Interfaces
 {
     public interface IGeoServiceManager
     {
+        void AddContinent(Continent continent);
+        void UpdateContinent(Continent continent);
+        void RemoveContinent(Continent continent);
+        Continent GetContinent(string name);
         void AddRiver(River river);
         void UpdateRiver(River river);
         void RemoveRiver(River river);
@@ -19,9 +23,5 @@ namespace Domain.Interfaces
         void UpdateCountry(Country country);
         void RemoveCountry(Country country);
         Country GetCountry(string name);
-        void AddContinent(Continent continent);
-        void UpdateContinent(Continent continent);
-        void RemoveContinent(Continent continent);
-        Continent GetContinent(string name);
     }
 }

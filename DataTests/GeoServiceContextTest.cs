@@ -27,7 +27,7 @@ namespace DataTests
 
             if (fillDb)
             {
-                Database.ExecuteSqlRaw("INSERT INTO dbo.Continents VALUES('Europe', 500), ('Oceania', 1000), ('United States', 0);" +
+                Database.ExecuteSqlRaw("INSERT INTO dbo.Continents VALUES('Europe'), ('Oceania'), ('United States');" +
                     "INSERT INTO dbo.Countries VALUES('Belgium', 200, 100, 1), ('France', 300, 200, 1), ('Australia', 700, 500, 2);" +
                     "INSERT INTO dbo.Cities VALUES('Brussel', 150, 1, 1), ('Gent', 50, 1, 0), ('Perth', 300, 3, 0);" +
                     "INSERT INTO dbo.Rivers VALUES ('Schelde', 300), ('Maas', 500), ('Swan River', 700);" +
