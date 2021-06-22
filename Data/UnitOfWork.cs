@@ -21,5 +21,17 @@ namespace Data
         public IRepository<City> CityRepo => new CityRepo(_context);
 
         public IRepository<River> RiverRepo => new RiverRepo(_context);
+
+        public void Complete()
+        {
+            try
+            {
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

@@ -14,7 +14,6 @@ namespace Data
             {
                 Id = continent.Id,
                 Name = continent.Name,
-                Population = continent.Population,
                 Countries = continent.Countries.Select(x => ModelToDb(x)).ToList()
             };
         }
@@ -81,7 +80,6 @@ namespace Data
                 Countries = river.Countries.Select(x => new CountryRiver { CountryId = x.Id, RiverId = river.Id }).ToList()
             };
         }
-
 
         public static River DbToModel(RiverDb riverDb)
         {
