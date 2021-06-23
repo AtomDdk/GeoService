@@ -1,3 +1,6 @@
+using Data;
+using Domain;
+using Domain.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -25,6 +28,8 @@ namespace GeoService
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddSingleton<IGeoServiceManager>(new GeoServiceManager(new UnitOfWork(new GeoServiceContext(Configuration))));
+            Configuration.GetConnectionString("production");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

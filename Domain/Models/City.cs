@@ -22,14 +22,14 @@ namespace Domain.Models
         public string Name
         {
             get => _name;
-            set => _name = string.IsNullOrWhiteSpace(value) == false ? _name = value : throw new CityException("The City must have a name");
+            set => _name = string.IsNullOrWhiteSpace(value) == false ? _name = value : throw new DomainException("The City must have a name");
         }
         public long Population { get; set; }
         private Country _country;
         public Country Country
         {
             get => _country;
-            set => _country = value ?? throw new CityException("A City must be part of a Country");
+            set => _country = value ?? throw new DomainException("A City must be part of a Country");
         }
 
         public override bool Equals(object obj)

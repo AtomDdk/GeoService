@@ -21,7 +21,7 @@ namespace Domain.Models
         public string Name
         {
             get => _name;
-            set => _name = string.IsNullOrWhiteSpace(value) == false ? _name = value : throw new ContinentException("The Continent must have a name");
+            set => _name = string.IsNullOrWhiteSpace(value) == false ? _name = value : throw new DomainException("The Continent must have a name.");
         }
         public long Population => Countries.Sum(x => x.Population);
         private HashSet<Country> CountriesPrivate { get; set; } = new HashSet<Country>();
@@ -37,9 +37,9 @@ namespace Domain.Models
         public void AddCountry(Country country)
         {
             if (CountriesPrivate.Any(x => x.Name == country.Name))
-                throw new ContinentException($"The name of a country must be unique within a continent. {country.Name}");
+                throw new DomainException($"The name of a country must be unique within a continent. {country.Name}");
             if (CountriesPrivate.Add(country) == false)
-                throw new ContinentException($"The country already exists in this continent. {country}");
+                throw new DomainException($"The country already exists in this continent. {country}");
         }
 
         public override bool Equals(object obj)

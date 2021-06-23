@@ -13,12 +13,12 @@ namespace DomainTests.ModelTests
         [TestMethod]
         public void NameIsNull()
         {
-            Assert.ThrowsException<ContinentException>(() => new Continent(1, null, new List<Country>()));
+            Assert.ThrowsException<DomainException>(() => new Continent(1, null, new List<Country>()));
         }
         [TestMethod]
         public void NameIsEmpty()
         {
-            Assert.ThrowsException<ContinentException>(() => new Continent(1, "", new List<Country>()));
+            Assert.ThrowsException<DomainException>(() => new Continent(1, "", new List<Country>()));
         }
 
         [TestMethod]
@@ -27,7 +27,7 @@ namespace DomainTests.ModelTests
             Continent continent = new Continent(1, "Europe", new List<Country>());
             Country country = new Country(1, "Belgium", 100, 200, continent, new List<City>(), new List<City>(), new List<River>());
             Country country1 = new Country(1, "Belgium", 100, 200, continent, new List<City>(), new List<City>(), new List<River>());
-            Assert.ThrowsException<ContinentException>(() => continent.AddCountries(new List<Country> { country, country1 }));
+            Assert.ThrowsException<DomainException>(() => continent.AddCountries(new List<Country> { country, country1 }));
         }
 
         [TestMethod]
@@ -37,7 +37,7 @@ namespace DomainTests.ModelTests
             Country country = new Country(1, "Belgium", 100, 200, continent, new List<City>(), new List<City>(), new List<River>());
             Country country1 = new Country(1, "Belgium", 100, 200, continent, new List<City>(), new List<City>(), new List<River>());
             continent.AddCountry(country1);
-            Assert.ThrowsException<ContinentException>(() => continent.AddCountry(country));
+            Assert.ThrowsException<DomainException>(() => continent.AddCountry(country));
         }
 
         [TestMethod]
@@ -46,7 +46,7 @@ namespace DomainTests.ModelTests
             Continent continent = new Continent(1, "Europe", new List<Country>());
             Country country = new Country(1, "Belgium", 100, 200, continent, new List<City>(), new List<City>(), new List<River>());
             Country country1 = new Country(130, "Belgium", 400, 300, continent, new List<City>(), new List<City>(), new List<River>());
-            Assert.ThrowsException<ContinentException>(() => continent.AddCountries(new List<Country> { country, country1 }));
+            Assert.ThrowsException<DomainException>(() => continent.AddCountries(new List<Country> { country, country1 }));
         }
 
         [TestMethod]
@@ -56,7 +56,7 @@ namespace DomainTests.ModelTests
             Country country = new Country(1, "Belgium", 100, 200, continent, new List<City>(), new List<City>(), new List<River>());
             Country country1 = new Country(130, "Belgium", 400, 300, continent, new List<City>(), new List<City>(), new List<River>());
             continent.AddCountry(country1);
-            Assert.ThrowsException<ContinentException>(() => continent.AddCountry(country));
+            Assert.ThrowsException<DomainException>(() => continent.AddCountry(country));
         }
         [TestMethod]
         public void PopulationOfCountriesIsCorrect()

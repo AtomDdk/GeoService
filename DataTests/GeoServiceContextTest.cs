@@ -9,15 +9,16 @@ namespace DataTests
 {
     public class GeoServiceContextTest : GeoServiceContext
     {
-        public GeoServiceContextTest(bool keepExistingDb = false, bool fillDb = true) : base("test")
+        public GeoServiceContextTest(bool keepExistingDb = false, bool fillDb = true) : base(null)
         {
+            _connectionString = @"Data Source=DESKTOP-4NAJBEU\SQLEXPRESS;Initial Catalog=Testing;Integrated Security=True";
             CreateDb(keepExistingDb, fillDb);
         }
-        protected override void SetConnectionString(string connection)
-        {
-            if (connection == "test")
-                _connectionString = @"Data Source=DESKTOP-4NAJBEU\SQLEXPRESS;Initial Catalog=Testing;Integrated Security=True";
-        }
+        //protected override void SetConnectionString(string connection)
+        //{
+        //    if (connection == "test")
+        //        _connectionString = @"Data Source=DESKTOP-4NAJBEU\SQLEXPRESS;Initial Catalog=Testing;Integrated Security=True";
+        //}
         public void CreateDb(bool keepExistingDb, bool fillDb)
         {
             if (keepExistingDb)

@@ -66,6 +66,18 @@ namespace Data.Repos
             }
         }
 
+        public bool Exists(int id)
+        {
+            try
+            {
+                return _context.Rivers.AsNoTracking().Any(x => x.Id == id);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public River Get(string name)
         {
             try

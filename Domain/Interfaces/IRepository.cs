@@ -13,6 +13,12 @@ namespace Domain.Interfaces
         /// <returns></returns>
         bool Exists(string name);
         /// <summary>
+        /// Checks if the value exists by id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        bool Exists(int id);
+        /// <summary>
         /// Gets the value by id.
         /// </summary>
         /// <param name="id"></param>

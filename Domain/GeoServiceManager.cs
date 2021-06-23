@@ -88,6 +88,20 @@ namespace Domain
             }
         }
 
+        public City GetCity(int id)
+        {
+            try
+            {
+                if (!_unitOfWork.CityRepo.Exists(id))
+                    throw new DomainException("The city does not exist.");
+                return _unitOfWork.CityRepo.Get(id);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public Continent GetContinent(string name)
         {
             try
@@ -95,6 +109,20 @@ namespace Domain
                 if (!_unitOfWork.ContinentRepo.Exists(name))
                     throw new DomainException("The continent does not exist.");
                 return _unitOfWork.ContinentRepo.Get(name);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public Continent GetContinent(int id)
+        {
+            try
+            {
+                if (!_unitOfWork.ContinentRepo.Exists(id))
+                    throw new DomainException("The continent does not exist.");
+                return _unitOfWork.ContinentRepo.Get(id);
             }
             catch (Exception ex)
             {
@@ -116,6 +144,20 @@ namespace Domain
             }
         }
 
+        public Country GetCountry(int id)
+        {
+            try
+            {
+                if (!_unitOfWork.CountryRepo.Exists(id))
+                    throw new DomainException("The country does not exist.");
+                return _unitOfWork.CountryRepo.Get(id);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public River GetRiver(string name)
         {
             try
@@ -123,6 +165,20 @@ namespace Domain
                 if (!_unitOfWork.RiverRepo.Exists(name))
                     throw new DomainException("The river does not exist.");
                 return _unitOfWork.RiverRepo.Get(name);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public River GetRiver(int id)
+        {
+            try
+            {
+                if (!_unitOfWork.RiverRepo.Exists(id))
+                    throw new DomainException("The river does not exist.");
+                return _unitOfWork.RiverRepo.Get(id);
             }
             catch (Exception ex)
             {
