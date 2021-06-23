@@ -28,6 +28,18 @@ namespace Data.Repos
             }
         }
 
+        public bool Exists(int id)
+        {
+            try
+            {
+                return _context.Countries.AsNoTracking().Any(x => x.Id == id);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public Country Get(int id)
         {
             try

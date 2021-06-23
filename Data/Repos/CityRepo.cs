@@ -52,6 +52,18 @@ namespace Data.Repos
             }
         }
 
+        public bool Exists(int id)
+        {
+            try
+            {
+                return _context.Cities.AsNoTracking().Any(x => x.Id == id);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public City Get(int id)
         {
             try

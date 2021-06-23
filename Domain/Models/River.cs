@@ -29,20 +29,20 @@ namespace Domain.Models
         public string Name
         {
             get => _name;
-            set => _name = string.IsNullOrWhiteSpace(value) == false ? _name = value : throw new RiverException("The River must have a name");
+            set => _name = string.IsNullOrWhiteSpace(value) == false ? _name = value : throw new DomainException("The River must have a name");
         }
         private long _length;
         public long Length
         {
             get => _length;
-            set => _length = value > 0 ? _length = value : throw new RiverException("A River cannot be 0 km or less in length.");
+            set => _length = value > 0 ? _length = value : throw new DomainException("A River cannot be 0 km or less in length.");
         }
         private HashSet<Country> CountriesPrivate { get; set; } = new HashSet<Country>();
         public IReadOnlyList<Country> Countries => CountriesPrivate.ToList().AsReadOnly();
         public void AddCountries(IEnumerable<Country> countries)
         {
             if (countries == null || countries.Count() < 1)
-                throw new RiverException("A river must belong to 1 or more countries");
+                throw new DomainException("A river must belong to 1 or more countries");
             foreach (var country in countries)
                 AddCountry(country);
         }
@@ -50,7 +50,7 @@ namespace Domain.Models
         public void AddCountry(Country country)
         {
             if (CountriesPrivate.Add(country) == false)
-                throw new RiverException($"The river already exists within this country. {country}");
+                throw new DomainException($"The river already exists within this country. {country}");
         }
 
         public override bool Equals(object obj)

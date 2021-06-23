@@ -27,25 +27,25 @@ namespace Domain.Models
         public string Name
         {
             get => _name;
-            set => _name = string.IsNullOrWhiteSpace(value) == false ? _name = value : throw new CountryException("The Country must have a name");
+            set => _name = string.IsNullOrWhiteSpace(value) == false ? _name = value : throw new DomainException("The Country must have a name");
         }
         private long _population;
         public long Population
         {
             get => _population;
-            set => _population = value > 0 ? _population = value : throw new CountryException("The population of a Country must be higher then 0.");
+            set => _population = value > 0 ? _population = value : throw new DomainException("The population of a Country must be higher then 0.");
         }
         private long _surface;
         public long Surface
         {
             get => _surface;
-            set => _surface = value > 0 ? _surface = value : throw new CountryException("The Surface of a Country must be higher then 0.");
+            set => _surface = value > 0 ? _surface = value : throw new DomainException("The Surface of a Country must be higher then 0.");
         }
         private Continent _continent;
         public Continent Continent
         {
             get => _continent;
-            set => _continent = value ?? throw new CountryException("The Country must be part of a Continent");
+            set => _continent = value ?? throw new DomainException("The Country must be part of a Continent");
         }
 
         private HashSet<City> CitiesPrivate { get; set; } = new HashSet<City>();
@@ -53,9 +53,9 @@ namespace Domain.Models
         public void AddCity(City city)
         {
             if (CitiesPrivate.Add(city) == false)
-                throw new CountryException("The list of cities must be unique");
+                throw new DomainException("The list of cities must be unique");
             if (CitiesPrivate.Sum(x => x.Population) > Population)
-                throw new CountryException("The total population of cities cannot be higher than the population of a country");
+                throw new DomainException("The total population of cities cannot be higher than the population of a country");
         }
 
         public void AddCities(IEnumerable<City> cities)
@@ -69,7 +69,7 @@ namespace Domain.Models
         public void AddCapital(City capital)
         {
             if (CapitalsPrivate.Add(capital) == false)
-                throw new CountryException("The list of capitals must be unique");
+                throw new DomainException("The list of capitals must be unique");
             else
                 CitiesPrivate.Add(capital);
         }
@@ -85,7 +85,7 @@ namespace Domain.Models
         public void AddRiver(River river)
         {
             if (RiversPrivate.Add(river) == false)
-                throw new CountryException("The List of rivers must be unique");
+                throw new DomainException("The List of rivers must be unique");
         }
         public void AddRivers(IEnumerable<River> rivers)
         {

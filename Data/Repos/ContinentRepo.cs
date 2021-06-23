@@ -52,6 +52,18 @@ namespace Data.Repos
             }
         }
 
+        public bool Exists(int id)
+        {
+            try
+            {
+                return _context.Continents.AsNoTracking().Any(x => x.Id == id);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public Continent Get(int id)
         {
             try

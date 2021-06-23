@@ -13,17 +13,17 @@ namespace DomainTests.ModelTests
         [TestMethod]
         public void NameIsNull()
         {
-            Assert.ThrowsException<CityException>(() => new City(1, null, 10000, new Country()));
+            Assert.ThrowsException<DomainException>(() => new City(1, null, 10000, new Country()));
         }
         [TestMethod]
         public void NameIsEmpty()
         {
-            Assert.ThrowsException<CityException>(() => new City(1, "", 10000, new Country()));
+            Assert.ThrowsException<DomainException>(() => new City(1, "", 10000, new Country()));
         }
         [TestMethod]
         public void CountryIsNull()
         {
-            Assert.ThrowsException<CityException>(() => new City(1, null, 10000, null));
+            Assert.ThrowsException<DomainException>(() => new City(1, null, 10000, null));
         }
     }
 }
