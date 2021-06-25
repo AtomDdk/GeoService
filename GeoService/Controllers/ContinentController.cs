@@ -5,6 +5,7 @@ using GeoService.Models.In;
 using GeoService.Models.Out;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,9 +18,11 @@ namespace GeoService.Controllers
     public class ContinentController : ControllerBase
     {
         private IGeoServiceManager _geoServiceManager;
-        public ContinentController(IGeoServiceManager geoServiceManager)
+        private string _hostUrl;
+        public ContinentController(IGeoServiceManager geoServiceManager, IConfiguration configuration)
         {
             _geoServiceManager = geoServiceManager;
+            _hostUrl = configuration.GetValue<string>("profiles:GeoService:applicationUrl");
         }
         
         [HttpPost]
@@ -29,7 +32,7 @@ namespace GeoService.Controllers
             {
                 Continent continent = Mapper.ApiToDomain(continentApiIn);
                 _geoServiceManager.AddContinent(continent);
-                ContinentApiOut continentApiOut = Mapper.DomainToApi(_geoServiceManager.GetContinent(continentApiIn.Id));
+                ContinentApiOut continentApiOut = Mapper.DomainToApi(_geoServiceManager.GetContinent(continentApiIn.Id), _hostUrl);
                 
                 return CreatedAtAction(nameof(PostContinent), continentApiOut);
             }
@@ -45,7 +48,7 @@ namespace GeoService.Controllers
         {
             try
             {
-                ContinentApiOut continentApiOut = Mapper.DomainToApi(_geoServiceManager.GetContinent(id));
+                ContinentApiOut continentApiOut = Mapper.DomainToApi(_geoServiceManager.GetContinent(id), _hostUrl);
                 return Ok(continentApiOut);
             }
             catch (Exception ex)
@@ -66,7 +69,7 @@ namespace GeoService.Controllers
                 Continent continent = Mapper.ApiToDomain(continentApiIn);
                 _geoServiceManager.UpdateContinent(continent);
 
-                return CreatedAtAction(nameof(PutContinent), _geoServiceManager.GetContinent(id));
+                return CreatedAtAction(nameof(PutContinent), Mapper.DomainToApi(_geoServiceManager.GetContinent(id), _hostUrl));
             }
             catch (Exception ex)
             {

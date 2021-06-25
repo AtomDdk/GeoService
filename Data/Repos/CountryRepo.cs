@@ -139,7 +139,13 @@ namespace Data.Repos
         {
             try
             {
-                _context.Countries.Update(Mapper.ModelToDb(value));
+                var riverDb = Mapper.ModelToDb(value);
+                var x = _context.Countries.AsNoTracking().Where(x => x.Id == riverDb.Id)
+                    .Include(x => x.Cities)
+                    .Include(x => x.Continent)
+                    .Include(x => x.Rivers).ThenInclude(x => x.River).Single();
+                x = riverDb;
+                _context.Countries.Update(x);
             }
             catch (Exception ex)
             {

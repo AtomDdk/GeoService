@@ -9,6 +9,5 @@ namespace GeoService.Models.In
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        //public List<int> CountryIds { get; set; } = new List<int>();
     }
 }

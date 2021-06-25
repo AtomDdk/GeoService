@@ -10,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -19,7 +20,10 @@ namespace GeoService
     {
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            //Configuration = configuration;
+            var builder = new ConfigurationBuilder().AddConfiguration(configuration)
+                .AddJsonFile(Path.Combine(Directory.GetCurrentDirectory(), "Properties", "launchSettings.json"));
+            Configuration = builder.Build();
         }
 
         public IConfiguration Configuration { get; }
@@ -28,6 +32,7 @@ namespace GeoService
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddSingleton<IConfiguration>(Configuration);
             services.AddSingleton<IGeoServiceManager>(new GeoServiceManager(new UnitOfWork(new GeoServiceContext(Configuration))));
             Configuration.GetConnectionString("production");
         }
