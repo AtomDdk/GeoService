@@ -65,6 +65,11 @@ namespace Domain.Models
                 AddCity(city);
         }
 
+        public void RemoveCity(City city)
+        {
+            CitiesPrivate.RemoveWhere(x => city == x);
+        }
+
         private HashSet<City> CapitalsPrivate { get; set; } = new HashSet<City>();
         public void AddCapital(City capital)
         {
@@ -80,6 +85,12 @@ namespace Domain.Models
             foreach (var capital in capitals)
                 AddCapital(capital);
         }
+
+        public void RemoveCapital(City city)
+        {
+            CapitalsPrivate.RemoveWhere(x => city == x);
+            RemoveCity(city);
+        }
         public IReadOnlyList<City> Capitals => CapitalsPrivate.ToList().AsReadOnly();
         private HashSet<River> RiversPrivate { get; set; } = new HashSet<River>();
         public void AddRiver(River river)
@@ -92,6 +103,18 @@ namespace Domain.Models
             rivers ??= new List<River>();
             foreach (var river in rivers)
                 AddRiver(river);
+        }
+        public void UpdateRivers(IEnumerable<River> rivers)
+        {
+            // removes deleted rivers.
+            RiversPrivate.RemoveWhere(x => rivers.Contains(x) == false);
+
+            // adds added rivers
+            var addedRivers = rivers.Where(x => RiversPrivate.Contains(x) == false).Select(x => RiversPrivate.Add(x));
+        }
+        public void RemoveRiver(River river)
+        {
+            RiversPrivate.RemoveWhere(x => x == river);
         }
         public IReadOnlyList<River> Rivers => RiversPrivate.ToList().AsReadOnly();
 

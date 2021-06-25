@@ -308,6 +308,7 @@ namespace Domain.Tests
             belgium.Population = 500;
             manager.UpdateCountry(belgium);
 
+
             Assert.AreEqual(belgium, manager.GetCountry("NotBelgium"));
         }
         
